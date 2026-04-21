@@ -4,6 +4,11 @@
   --color-base: #210E2D;
   --color-secondary: #F4B6D7;
   --color-accent: #FF309F;
+  
+  --color-white: #F3F3F3;
+  --color-gray: #B5B5B5;
+  --color-black: #111111;
+  
 
   --color-success: #22C55E;
   --color-error: #EF4444;
@@ -11,3 +16,7 @@
   --color-info: #06B6D4;
 }
 
+body {
+  font-family: "Anonymous Pro", monospace;
+  background: #210E2D;
+}
