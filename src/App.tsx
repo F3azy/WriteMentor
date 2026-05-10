@@ -1,5 +1,6 @@
 import Button from "./components/Button";
 import HeroText from "./components/HeroText";
+import LanguagePicker from "./components/LanguagePicker";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
       <main className="px-32 flex-1 flex flex-col justify-center items-center gap-y-8">
         <HeroText />
         <div className="flex gap-4">
-          <Button>Get Started</Button>
+          <LanguagePicker/>
           <Button>Get Started</Button>
         </div>
       </main>

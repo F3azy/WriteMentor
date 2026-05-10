@@ -22,7 +22,7 @@ export default function Button({
         py-4 px-2 rounded-lg font-bold 
         text-black bg-accent
         cursor-pointer
-        hover:bg-accent/90
+        hover:bg-accent/80
         transition-colors duration-200
         disabled:opacity-50 disabled:cursor-not-allowed
         ${className}
