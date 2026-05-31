@@ -19,7 +19,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={`
-        py-4 px-2 rounded-lg font-bold 
+        py-4 px-3 rounded-lg font-bold 
         text-black bg-accent
         cursor-pointer
         hover:bg-accent/80
