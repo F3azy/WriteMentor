@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useWikiText } from "../hooks/useWikiText";
 import LanguagePicker from "./LanguagePicker";
 import Button from "./Button";
 import WriteArea from "./WriteArea";
@@ -6,8 +7,32 @@ import WriteArea from "./WriteArea";
 export default function WritePage() {
   const [visible, setVisible] = useState(false);
 
+  const { text, loading, refetch } = useWikiText("pl");
+  const [value, setValue] = useState("");
+
+  const handleChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+
+    if (newValue.length <= text.length) {
+      setValue(newValue);
+
+      const isComplete =
+        newValue.length === text.length &&
+        newValue.toLowerCase() === text.toLowerCase();
+
+      if (isComplete) {
+        refetch();
+        setValue("");
+      }
+    }
+  };
+
+  const handleChangeText = async () => {
+    await refetch();
+    setValue("");
+  };
+
   useEffect(() => {
-    // triggers animation AFTER mount
     requestAnimationFrame(() => {
       setVisible(true);
     });
@@ -23,10 +48,17 @@ export default function WritePage() {
     >
       <div className="flex gap-x-4">
         <LanguagePicker />
-        <Button className="tracking-wider">Change</Button>
+        <Button className="tracking-wider" onClick={handleChangeText}>
+          Change Text
+        </Button>
       </div>
 
-      <WriteArea />
+      <WriteArea
+        text={text}
+        loading={loading}
+        value={value}
+        onChange={handleChangeValue}
+      />
     </div>
   );
 }

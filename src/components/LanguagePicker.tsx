@@ -1,17 +1,58 @@
+import { useEffect, useRef, useState } from "react";
+import { languages, type Language } from "../const/Languages";
+
+
+
 const LanguagePicker = () => {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(languages[0]);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleSelect = (lang: Language) => {
+    setSelected(lang);
+    setOpen(false);
+  };
+
+  // close on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div
-      className="px-3 py-4 
-    flex justify-center items-center
-    gap-x-2
-    text-white font-bold
-    border-white border-2 rounded-lg hover:cursor-pointer"
-    >
-      <img
-        width={28}
-        src="https://images.emojiterra.com/google/noto-emoji/unicode-17.0/color/svg/1f1ec-1f1e7.svg"
-      />
-      English {">"}
+    <div ref={ref} className="relative inline-block">
+      {/* Button */}
+      <div
+        onClick={() => setOpen((prev) => !prev)}
+        className="px-3 py-4 flex items-center gap-x-2 text-white font-bold border border-white rounded-lg cursor-pointer"
+      >
+        <img width={28} src={selected.flag} />
+        {selected.label} {">"}
+      </div>
+
+      {/* Dropdown */}
+      {open && (
+        <div className="absolute mt-2 w-full bg-black border border-white rounded-lg max-h-50 overflow-y-auto custom-scrollbar z-50">
+          {languages.map((lang) => (
+            <div
+              key={lang.code}
+              onClick={() => handleSelect(lang)}
+              className="flex gap-x-2 px-3 py-4 hover:bg-white/10 cursor-pointer text-white"
+            >
+              <img width={22} src={lang.flag} />
+              {lang.label}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
