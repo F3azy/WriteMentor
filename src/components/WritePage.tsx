@@ -25,17 +25,17 @@ export default function WritePage() {
   return (
     <div
       className={`
-        flex flex-1 flex-col gap-y-8
+        flex flex-1 flex-col gap-y-5 lg:gap-y-8
         transition-all duration-500 ease-out
         ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}
       `}
     >
-      <div className="flex gap-x-4">
+      <div className="flex flex-col sm:flex-row gap-3 lg:gap-x-4">
         <LanguagePicker />
-        <Button className="tracking-wider" onClick={changeText}>
+        <Button className="tracking-wider flex-1 sm:flex-none" onClick={changeText}>
           Change Text
         </Button>
-        <Button className="tracking-wider" onClick={clearValue}>
+        <Button className="tracking-wider flex-1 sm:flex-none" onClick={clearValue}>
           Clear
         </Button>
       </div>

@@ -9,8 +9,8 @@ type WriteAreaProps = {
 
 const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
   return (
-    <div className="relative flex-1 bg-secondary rounded-lg font-mono text-2xl">
-      <div className="absolute inset-0 p-4 leading-relaxed select-none whitespace-pre-wrap">
+    <div className="relative flex-1 bg-secondary rounded-lg font-mono text-lg sm:text-xl lg:text-2xl">
+      <div className="absolute inset-0 p-4 leading-relaxed select-none whitespace-pre-wrap text-lg sm:text-xl lg:text-2xl">
         {loading ? (
           <p className="text-black">Loading...</p>
         ) : (
@@ -53,8 +53,8 @@ const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
           caret-black
           resize-none
           outline-none
-          font-mono text-2xl leading-relaxed
-          
+          font-mono leading-relaxed
+          text-lg sm:text-xl lg:text-2xl
 
           selection:bg-transparent
           selection:text-transparent
