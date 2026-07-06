@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { languages, type Language } from "../const/Languages";
+import { useLanguage } from "../context/Language/useLanguage";
 
 
 
 const LanguagePicker = () => {
+  const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(languages[0]);
   const ref = useRef<HTMLDivElement>(null);
 
+   const selected = languages.find((language) => language.code === lang) ?? languages[0];
+
   const handleSelect = (lang: Language) => {
-    setSelected(lang);
+    setLang(lang.code);
     setOpen(false);
   };
 

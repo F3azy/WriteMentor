@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HeroSection from "./components/HeroSection";
+import HeroPage from "./components/HeroPage";
 import Navbar from "./components/Navbar";
 import WritePage from "./components/WritePage";
 
@@ -25,7 +25,7 @@ function App() {
       flex-1 flex flex-col justify-center"
       >
         {!showWrite ? (
-          <HeroSection started={started} onStart={handleStart} />
+          <HeroPage started={started} onStart={handleStart} />
         ) : (
           <WritePage />
         )}

@@ -7,7 +7,7 @@ type Props = {
   onStart: () => void;
 };
 
-const HeroSection = ({ started, onStart }: Props) => {
+const HeroPage = ({ started, onStart }: Props) => {
   return (
     <div
       className={`flex flex-col items-center gap-y-8 transition-all duration-500 ease-in-out ${started ? "-translate-y-10 opacity-0" : "translate-y-0 opacity-100"}`}
@@ -21,4 +21,4 @@ const HeroSection = ({ started, onStart }: Props) => {
   );
 };
 
-export default HeroSection;
+export default HeroPage;

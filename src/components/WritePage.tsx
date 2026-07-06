@@ -7,7 +7,7 @@ import WriteArea from "./WriteArea";
 export default function WritePage() {
   const [visible, setVisible] = useState(false);
 
-  const { text, loading, refetch } = useWikiText("pl");
+  const { text, loading, refetch } = useWikiText();
   const [value, setValue] = useState("");
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -51,6 +51,7 @@ export default function WritePage() {
         <Button className="tracking-wider" onClick={handleChangeText}>
           Change Text
         </Button>
+        <Button className="tracking-wider" onClick={() => setValue("")}>Clear</Button>
       </div>
 
       <WriteArea

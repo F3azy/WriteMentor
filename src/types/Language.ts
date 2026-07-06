@@ -1,0 +1,1 @@
+export type WikiLang = "en" | "pl" | "de" | "fr" | "it" | "es";

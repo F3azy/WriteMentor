@@ -1,5 +1,7 @@
+import type { WikiLang } from "../types/Language";
+
 export type Language = {
-  code: "en" | "pl" | "de" | "fr" | "it" | "es";
+  code: WikiLang;
   label: string;
   flag: string;
 };
