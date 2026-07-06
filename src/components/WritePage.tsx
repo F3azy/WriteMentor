@@ -3,34 +3,18 @@ import { useWikiText } from "../hooks/useWikiText";
 import LanguagePicker from "./LanguagePicker";
 import Button from "./Button";
 import WriteArea from "./WriteArea";
+import { useTypingSession } from "../hooks/useTypingSession";
 
 export default function WritePage() {
-  const [visible, setVisible] = useState(false);
-
   const { text, loading, refetch } = useWikiText();
-  const [value, setValue] = useState("");
 
-  const handleChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
+  const { value, handleChangeValue, clearValue, changeText } = useTypingSession(
+    text,
+    refetch,
+  );
 
-    if (newValue.length <= text.length) {
-      setValue(newValue);
-
-      const isComplete =
-        newValue.length === text.length &&
-        newValue.toLowerCase() === text.toLowerCase();
-
-      if (isComplete) {
-        refetch();
-        setValue("");
-      }
-    }
-  };
-
-  const handleChangeText = async () => {
-    await refetch();
-    setValue("");
-  };
+  //start animation
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -48,10 +32,12 @@ export default function WritePage() {
     >
       <div className="flex gap-x-4">
         <LanguagePicker />
-        <Button className="tracking-wider" onClick={handleChangeText}>
+        <Button className="tracking-wider" onClick={changeText}>
           Change Text
         </Button>
-        <Button className="tracking-wider" onClick={() => setValue("")}>Clear</Button>
+        <Button className="tracking-wider" onClick={clearValue}>
+          Clear
+        </Button>
       </div>
 
       <WriteArea

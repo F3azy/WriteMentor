@@ -1,3 +1,5 @@
+import { isSameChar, isSpace } from "../utils/typing";
+
 type WriteAreaProps = {
   text: string;
   loading: boolean;
@@ -23,15 +25,11 @@ const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
               );
             }
 
-            const isCorrect = typed?.toLowerCase() === char.toLowerCase();
-
-            const isSpace = char === " ";
-
-            if (!isCorrect) {
+            if (!isSameChar(typed, char)) {
               return (
                 <span
                   key={i}
-                  className={isSpace ? " bg-red-500" : "text-red-500"}
+                  className={isSpace(char) ? " bg-red-500" : "text-red-500"}
                 >
                   {char}
                 </span>
