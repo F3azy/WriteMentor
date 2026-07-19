@@ -1,38 +1,40 @@
 import { useLayoutEffect, useRef } from "react";
 
+const MOBILE_BREAKPOINT = 640;
+
 export function useTypingAutoScroll(value: string) {
-  const displayRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
+  const previousCaretTop = useRef(0);
 
   useLayoutEffect(() => {
-    const display = displayRef.current;
-    const textarea = textareaRef.current;
+    if (window.innerWidth >= MOBILE_BREAKPOINT) return;
+
     const caret = caretRef.current;
+    if (!caret) return;
 
-    if (!display || !textarea || !caret) return;
-
-    const styles = getComputedStyle(display);
-    const lineHeight = parseFloat(styles.lineHeight);
-    const paddingTop = parseFloat(styles.paddingTop);
-
-    // Position of the current typing row inside the text.
     const caretTop = caret.offsetTop;
 
-    // First row stays at scrollTop 0.
-    // When the caret enters row 2, scroll by one row.
-    const nextScrollTop = Math.max(
-      0,
-      caretTop - paddingTop - lineHeight,
-    );
+    if (caretTop === previousCaretTop.current) return;
 
-    display.scrollTop = nextScrollTop;
-    textarea.scrollTop = nextScrollTop;
+    previousCaretTop.current = caretTop;
+
+    const viewportHeight =
+      window.visualViewport?.height ?? window.innerHeight;
+
+    const visibleBottom =
+      (window.visualViewport?.offsetTop ?? 0) +
+      viewportHeight -
+      40;
+
+    const { bottom } = caret.getBoundingClientRect();
+
+    if (bottom > visibleBottom) {
+      window.scrollBy({
+        top: bottom - visibleBottom,
+        behavior: "auto",
+      });
+    }
   }, [value]);
 
-  return {
-    displayRef,
-    textareaRef,
-    caretRef,
-  };
+  return { caretRef };
 }

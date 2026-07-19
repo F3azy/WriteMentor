@@ -9,12 +9,26 @@ type WriteAreaProps = {
 };
 
 const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
-  const { displayRef, textareaRef, caretRef } = useTypingAutoScroll(value);
+  const { caretRef } = useTypingAutoScroll(value);
 
   return (
     <div className="relative min-h-0 flex-1 bg-secondary rounded-lg font-mono text-lg sm:text-xl lg:text-2xl overflow-hidden">
+      {/* Mobile-only invisible layer that gives the wrapper its full height */}
       <div
-        ref={displayRef}
+        aria-hidden="true"
+        className="
+          invisible
+          p-4
+          leading-relaxed
+          whitespace-pre-wrap
+          wrap-break-word
+
+          sm:hidden
+        "
+      >
+        {loading ? "Loading..." : text}
+      </div>
+      <div
         aria-hidden="true"
         className="absolute inset-0 p-4 leading-relaxed select-none whitespace-pre-wrap text-lg sm:text-xl lg:text-2xl overflow-hidden"
       >
@@ -48,7 +62,6 @@ const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
       </div>
 
       <textarea
-        ref={textareaRef}
         className="
           absolute inset-0 p-4 w-full h-full
           overflow-hidden
