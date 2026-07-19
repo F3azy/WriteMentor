@@ -29,7 +29,6 @@ const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
             >
               {i === value.length && (
                 <span
-                  ref={caretRef}
                   className="
                       absolute
                       left-0
@@ -42,9 +41,7 @@ const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
                     "
                 />
               )}
-              <span className={`${getCharacterClass(value[i], char)}`}>
-                {char}
-              </span>
+              <span className={getCharacterClass(value[i], char)}>{char}</span>
             </span>
           ))
         )}
