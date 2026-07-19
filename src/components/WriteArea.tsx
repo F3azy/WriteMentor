@@ -1,4 +1,4 @@
-import { isSameChar, isSpace } from "../utils/typing";
+import { getCharacterClass } from "../utils/typing";
 
 type WriteAreaProps = {
   text: string;
@@ -14,34 +14,11 @@ const WriteArea = ({ text, loading, value, onChange }: WriteAreaProps) => {
         {loading ? (
           <p className="text-black">Loading...</p>
         ) : (
-          text.split("").map((char, i) => {
-            const typed = value[i];
-
-            if (typed === undefined) {
-              return (
-                <span key={i} className="text-black opacity-30">
-                  {char}
-                </span>
-              );
-            }
-
-            if (!isSameChar(typed, char)) {
-              return (
-                <span
-                  key={i}
-                  className={isSpace(char) ? " bg-red-500" : "text-red-500"}
-                >
-                  {char}
-                </span>
-              );
-            }
-
-            return (
-              <span key={i} className="text-black">
-                {char}
-              </span>
-            );
-          })
+          text.split("").map((char, i) => (
+            <span key={i} className={getCharacterClass(value[i], char)}>
+              {char}
+            </span>
+          ))
         )}
       </div>
 
