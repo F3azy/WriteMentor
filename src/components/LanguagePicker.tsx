@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { languages, type Language } from "../const/Languages";
 import { useLanguage } from "../context/Language/useLanguage";
 
-const LanguagePicker = () => {
+type LanguagePickerProps = {
+  onLanguageChange?: () => void;
+};
+
+const LanguagePicker = ({ onLanguageChange }: LanguagePickerProps) => {
   const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
 
@@ -10,6 +14,7 @@ const LanguagePicker = () => {
     languages.find((language) => language.code === lang) ?? languages[0];
 
   const handleSelect = (lang: Language) => {
+    onLanguageChange?.();
     setLang(lang.code);
     setOpen(false);
   };

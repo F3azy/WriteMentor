@@ -18,8 +18,8 @@ export function useTypingSession(text: string, refetch: () => Promise<void>) {
   };
 
   const changeText = async () => {
-    await refetch();
     setValue("");
+    await refetch();
   };
 
   const clearValue = () => setValue("");
