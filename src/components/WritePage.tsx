@@ -25,7 +25,7 @@ export default function WritePage() {
   return (
     <div
       className={`
-        flex flex-1 flex-col gap-y-5 lg:gap-y-8
+        flex flex-1 flex-col gap-y-5 lg:gap-y-8 min-h-0
         transition-all duration-500 ease-out
         ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}
       `}
