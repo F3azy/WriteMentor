@@ -32,12 +32,20 @@ export default function WritePage() {
     >
       <div className="flex flex-col sm:flex-row gap-3 lg:gap-x-4">
         <LanguagePicker />
-        <Button className="tracking-wider flex-1 sm:flex-none" onClick={changeText}>
-          Change Text
-        </Button>
-        <Button className="tracking-wider flex-1 sm:flex-none" onClick={clearValue}>
-          Clear
-        </Button>
+        <div className="flex gap-x-3 lg:gap-x-4">
+          <Button
+            className="tracking-wider flex-1 sm:flex-none"
+            onClick={changeText}
+          >
+            Change Text
+          </Button>
+          <Button
+            className="tracking-wider flex-1 sm:flex-none"
+            onClick={clearValue}
+          >
+            Clear
+          </Button>
+        </div>
       </div>
 
       <WriteArea
